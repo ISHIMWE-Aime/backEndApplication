@@ -94,17 +94,13 @@ module.exports.userRegister = async (req, res) => {
 
         console.log(user)
 
-        //res.setHeader("Access-Control-Allow-Origin", "*")
         res.status(200).json({ "statusCode": 200, "message": 'Your registration done successfully' })
     } catch (error) {
         const errors = handleErrors(error)
         if (errors[1]) {
-            //res.setHeader("Access-Control-Allow-Origin", "*")
             return res.status(400).json({ "statusCode": 400, "message": errors[0] })
         }
         else {
-            
-            //res.setHeader("Access-Control-Allow-Origin", "*")
             res.status(400).json(errors)
         }
 
