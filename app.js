@@ -4,6 +4,7 @@ const mongoose = require("mongoose") //for mongoose
 const cookieParser = require('cookie-parser')
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
+const cors = require('cors')
 //const { options } = require('./router/routes')
 
 const PORT = process.env.PORT || 5000
