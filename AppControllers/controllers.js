@@ -94,6 +94,7 @@ module.exports.userRegister = async (req, res) => {
 
         console.log(user)
 
+        res.setHeader({'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*"})
         res.status(200).json({ "statusCode": 200, "message": 'Your registration done successfully' })
     } catch (error) {
         const errors = handleErrors(error)
@@ -102,6 +103,8 @@ module.exports.userRegister = async (req, res) => {
             return res.status(400).json({ "statusCode": 400, "message": errors[0] })
         }
         else {
+            
+            res.setHeader({'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*"})
             res.status(400).json(errors)
         }
 
