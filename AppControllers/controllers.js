@@ -87,10 +87,10 @@ module.exports.adminRegister = async (req, res) => {
 
 //User registration
 module.exports.userRegister = async (req, res) => {
-    const { email, password } = req.body
+    const { firstName, middleName, lastName, email, userPreference, phoneCountryCode, phone, password } = req.body
 
     try {
-        const user = await UserSchema.create({ email, password })
+        const user = await UserSchema.create({ firstName, middleName, lastName, email, userPreference, phoneCountryCode, phone, password })
 
         console.log(user)
 
@@ -98,6 +98,7 @@ module.exports.userRegister = async (req, res) => {
     } catch (error) {
         const errors = handleErrors(error)
         if (errors[1]) {
+            res.setHeader({'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*"})
             return res.status(400).json({ "statusCode": 400, "message": errors[0] })
         }
         else {
@@ -166,7 +167,12 @@ module.exports.Adminlogin_post = async (req, res) => {
     }
     catch (err) {
         const errors = handleErrors(err)
-        return res.status(400).json({ 'statusCode': 400, 'message': errors })
+        if(errors[0].email !== ""){
+            return res.status(400).json({ 'statusCode': 400, 'message': { email: 'Your are not an admin' } })
+        }
+        else{
+            return res.status(400).json({ 'statusCode': 400, 'message': errors[0] })
+        }
     }
 }
 
