@@ -35,7 +35,10 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
 app.use(express.json())
 app.use(cookieParser())
 app.use(routes)
-
+app.use(cors({
+    origin: ['https://important-red-beanie.cyclic.app'],
+    credentials: true
+  }))
 mongoose
 	.connect("mongodb+srv://ISHIMWE-aime:Teta2005@cluster0.ytng98j.mongodb.net/MyBrand?retryWrites=true&w=majority", { useNewUrlParser: true })
 	.then(async () => {
