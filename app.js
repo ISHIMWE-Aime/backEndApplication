@@ -36,7 +36,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(routes)
 app.use(cors({
-    origin: ['https://important-red-beanie.cyclic.app'],
+    origin: ['https://important-red-beanie.cyclic.app/userRegister'],
     credentials: true
   }))
 mongoose
