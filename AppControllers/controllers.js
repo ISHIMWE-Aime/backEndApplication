@@ -101,7 +101,7 @@ module.exports.userRegister = async (req, res) => {
             return res.status(400).json({ "statusCode": 400, "message": errors[0] })
         }
         else {
-            res.status(400).json(errors)
+            res.status(400).json(errors[0])
         }
 
     }
