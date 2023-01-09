@@ -146,7 +146,7 @@ module.exports.Userlogin_post = async (req, res) => {
     }
     catch (err) {
         const errors = handleErrors(err)
-        return res.status(400).json({ "statusCode": 400, "message": errors })
+        return res.status(400).json({ "statusCode": 400, "message": errors[0] })
     }
 }
 
