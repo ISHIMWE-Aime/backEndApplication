@@ -31,11 +31,11 @@ const specs = swaggerJsDoc(options) //initialise swaggerJsDoc
 
 const app = express()
 //middlewares 
+app.use(cors())
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
 app.use(express.json())
 app.use(cookieParser())
 app.use(routes)
-app.use(cors())
 
 mongoose
 	.connect("mongodb+srv://ISHIMWE-aime:Teta2005@cluster0.ytng98j.mongodb.net/MyBrand?retryWrites=true&w=majority", { useNewUrlParser: true })
