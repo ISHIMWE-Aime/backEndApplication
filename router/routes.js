@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const controllers = require('../AppControllers/controllers')
 const { requireAuth, checkUser } = require('../middlerware/middleware')
-const cors = require('cors')
 
 /******************* Swagger Schemas **********************/
 
@@ -177,7 +176,7 @@ router.post('/adminRegister', controllers.adminRegister)
  */
 
 //user register routes
-router.post('/userRegister', cors(),controllers.userRegister)
+router.post('/userRegister', controllers.userRegister)
 
 /**
  * @swagger
