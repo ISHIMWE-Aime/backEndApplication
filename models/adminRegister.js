@@ -14,7 +14,7 @@ const adminSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Please enter the password'],
-        minLength: [6, 'Minimum password length is 6 characters'],
+        minLength: [6, 'Minimum password length must be 6 characters'],
         validate: [
             (password) => {
             const reg = /^(((?=.*[a-z])(?=.*[A-Z]))((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/
