@@ -32,7 +32,18 @@ const userSchema = mongoose.Schema({
     },
     phone:{
         type: String,
-        required: [true, 'Give us your phone number']
+        required: [true, 'Give us your phone number'],
+        validate: [
+            (phoneNumber) => {
+                const regexp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+                if(regexp.test(phoneNumber)){
+                    return true
+                }else{
+                    return false
+                }
+            },
+            'Please inter a valid phone number'
+        ]
     },
     password: {
         type: String,
