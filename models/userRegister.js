@@ -4,12 +4,35 @@ const bcrypt = require('bcrypt')
 
 //user schema
 const userSchema = mongoose.Schema({
+    firstName:{
+        type: String,
+        required: [true, 'We would like to know your first name']
+    },
+    middleName:{
+        type: String,
+    },
+    lastName:{
+        type: String,
+        required: [true, 'We would like to know your last name']
+    },
     email: {
         type: String,
         required: [true, 'Please enter the email'],
         unique: true,
         lowercase: true,
         validate: [isEmail, 'Please enter a valid email']
+    },
+    userPreference:{
+        type: String,
+        required: true
+    },
+    phoneCountryCode:{
+        type: String,
+        required: [true, 'Select a phone country code']
+    },
+    phone:{
+        type: String,
+        required: [true, 'Give us your phone number']
     },
     password: {
         type: String,
