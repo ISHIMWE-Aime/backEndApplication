@@ -8,6 +8,10 @@ const blogsSchema = mongoose.Schema({
         required: [true, 'Please enter a blog title'],
         unique: true,
     },
+    author:{
+        type: String,
+        required: [true, 'Please enter an author name']
+    },
     content: {
         type: String,
         required: [true, 'Please enter a blog content'],

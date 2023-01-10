@@ -41,6 +41,7 @@ const handleErrors = (err) => {
         })
     }
 
+    
     //validation errors for comment
     if (err.message.includes('coment validation failed')) {
         Object.values(err.errors).forEach(({ properties }) => {
@@ -49,7 +50,6 @@ const handleErrors = (err) => {
             errors[properties.path] = properties.message
         })
     }
-
     //validation errors for user
     if (err.message.includes('user validation failed')) {
         Object.values(err.errors).forEach(({ properties }) => {
@@ -270,7 +270,11 @@ module.exports.allBlogs = async (req, res) => {//creation of new 'GET' route wit
         const blogs = await BlogsSchema.find()
         res.json({ "statusCode": 200, "message": "Successfully", "data": blogs });
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        res.status(400)
+        res.json({
+            statusCode: 400,
+            error: error.message
+        })
     }
 }
 
@@ -287,6 +291,7 @@ module.exports.getOneBlog = async (req, res) => {
     } catch (error) {
         res.status(404)
         res.json({
+            statusCode: 404,
             error: error.message
         })
     }
@@ -297,6 +302,7 @@ module.exports.createBlog = async (req, res) => {
     try {
         const blog = new BlogsSchema({
             title: req.body.title,
+            author: req.body.author,
             content: req.body.content,
             imageUlr: req.body.imageUlr
         })
@@ -304,7 +310,11 @@ module.exports.createBlog = async (req, res) => {
         res.status(201).json({ "statusCode": 201, "message": "Created successfully" })
 
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        res.status(400)
+        res.json({
+        statusCode: 400,
+        error: error.message
+        })
     }
 }
 
@@ -328,6 +338,7 @@ module.exports.updateBlog = async (req, res) => {
     } catch (error) {
         res.status(400)
         res.json({
+            statusCode: 400,
             error: error.message
         })
     }
@@ -343,6 +354,7 @@ module.exports.deleteOneBlog = async (req, res) => {
     } catch (error) {
         res.status(400)
         res.json({
+            statusCode: 400,
             error: error.message
         })
     }
@@ -356,10 +368,13 @@ module.exports.deleteAllBlogs = async (req, res) => {
     } catch (error) {
         res.status(400)
         res.json({
+            statusCode: 400,
             error: error.message
         })
     }
 }
+
+/***************** User Reactions *******************/
 
 //Coment
 
@@ -385,6 +400,7 @@ module.exports.coment = async (req, res) => {
     }
 }
 
+// like
 module.exports.like = async (req, res) => {
     const { blogId, likerId } = req.body
 
@@ -460,11 +476,14 @@ module.exports.deleteAllLikes = async (req, res) => {
         res.status(200).json({ "statusCode": 200, "message": "Successful" })
     } catch (error) {
         res.status(404)
-        res.send(
-            { error: error.message }
-        )
+        res.json({
+            statusCode: 400,
+            error: error.message
+        })
     }
 }
+
+/******************** Contact Me Ops ***********************/
 
 module.exports.saveMessage = async (req, res) => {
     

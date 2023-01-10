@@ -13,6 +13,7 @@ const { requireAuth, checkUser } = require('../middlerware/middleware')
  *       type: object
  *       required:
  *         - title
+ *         - author
  *         - content
  *         - imageUlr
  *       properties:
@@ -22,6 +23,9 @@ const { requireAuth, checkUser } = require('../middlerware/middleware')
  *         title:
  *           type: string
  *           description: The blog title
+ *         author:
+ *           type: string
+ *           description: Provide blog author name
  *         content:
  *           type: string
  *           description: The blog suthor
@@ -32,8 +36,8 @@ const { requireAuth, checkUser } = require('../middlerware/middleware')
  *           type: string
  *           description: Version
  *       example:
- *           id: d5fE_ass
  *           title: The new Turing Omnibus
+ *           author: ISHIMWE Aime Fabrice
  *           content: Alexander K. Danny
  *           imageUlr: https://www.freeImages.com
  */
