@@ -46,9 +46,12 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
 app.use(express.json())
 app.use(cookieParser())
 app.use(routes)
-//"mongodb+srv://ISHIMWE-aime:Teta2005@cluster0.ytng98j.mongodb.net/MyBrand?retryWrites=true&w=majority"
+
+//'mongodb://localhost:27017/MyBranding'
+
+"mongodb+srv://ISHIMWE-aime:Teta2005@cluster0.ytng98j.mongodb.net/MyBrand?retryWrites=true&w=majority"
 mongoose
-	.connect('mongodb://localhost:27017/MyBranding', { useNewUrlParser: true })
+	.connect("mongodb+srv://ISHIMWE-aime:Teta2005@cluster0.ytng98j.mongodb.net/MyBrand?retryWrites=true&w=majority", { useNewUrlParser: true })
 	.then(async () => {
 		await app.listen(PORT, () => {
 			console.log("Server has started!")
