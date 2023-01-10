@@ -31,13 +31,17 @@ const specs = swaggerJsDoc(options) //initialise swaggerJsDoc
 
 const app = express()
 
-let corsOptions = {
-	origin: 'https://ishimwe-aime.github.io',
-	credentials:  true
-}
+let corsOptions = 
 
 //middlewares 
-app.use(cors(corsOptions))
+app.use(
+	cors(
+		{
+			origin: true,
+			credentials:  true
+		}
+	)
+)
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
 app.use(express.json())
 app.use(cookieParser())
