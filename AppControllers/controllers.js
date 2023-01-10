@@ -140,7 +140,7 @@ module.exports.Userlogin_post = async (req, res) => {
         const user = await UserSchema.login(email, password)
 
         const token = createUserToken(user._id)
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        res.cookie('jwt', token, { maxAge: maxAge * 1000 })
 
         return res.status(200).json({ "statusCode": 200, "message": 'user log in succesful', user: user._id, })
     }
