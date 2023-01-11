@@ -31,17 +31,13 @@ const specs = swaggerJsDoc(options) //initialise swaggerJsDoc
 
 const app = express()
 
-let corsOptions = 
+// let corsOptions = 		{
+// 	origin: true,
+// 	credentials:  true
+// }
 
 //middlewares 
-app.use(
-	cors(
-		{
-			origin: true,
-			credentials:  true
-		}
-	)
-)
+app.use(cors())
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
 app.use(express.json())
 app.use(cookieParser())
