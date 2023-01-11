@@ -143,9 +143,9 @@ module.exports.Userlogin_post = async (req, res) => {
         res.cookie('jwt', token, { 
                 httpOnly: true, 
                 maxAge: maxAge * 1000,
-                domain: 'ishimwe-aime.github.io',
-                secure: true,
-                sameSite:'none',
+                // domain: 'ishimwe-aime.github.io',
+                // secure: true,
+                // sameSite:'none',
             }
         )
 
