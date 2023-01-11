@@ -167,7 +167,13 @@ module.exports.Adminlogin_post = async (req, res) => {
         const admin = await AdminSchema.login(email, password)
 
         const token = createAdminToken(admin._id)
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        res.cookie('jwt', token, { 
+            httpOnly: true, 
+            maxAge: maxAge * 1000,
+            domain: 'ishimwe-aime.github.io',
+            secure: true,
+            sameSite:'none',
+        })
 
         return res.status(200).json({ "statusCode": 200, "message": 'Admin log in succesful', admin: admin._id, })
     }
