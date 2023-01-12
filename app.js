@@ -32,7 +32,7 @@ const specs = swaggerJsDoc(options) //initialise swaggerJsDoc
 const app = express()
 
 let corsOptions = 		{
-	origin: true,
+	origin:'https://ishimwe-aime.github.io',
 	credentials:  true
 }
 
