@@ -176,7 +176,7 @@ module.exports.Adminlogin_post = async (req, res) => {
         })
         res.jwt = token
 
-        return res.status(200).json({ "statusCode": 200, "message": 'Admin log in succesful', jwt: token })
+        return res.status(200).json({ "statusCode": 200, "message": 'Admin log in succesful', "jwt": token })
     }
     catch (err) {
         const errors = handleErrors(err)
