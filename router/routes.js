@@ -622,6 +622,4 @@ router.post('/sendMessage', checkUser, controllers.saveMessage)
  */
 // Get all messages from user
 router.get('/allMessages', requireAuth, controllers.messageFromUsers)
-
-router.post('/token', controllers.token)
 module.exports = router

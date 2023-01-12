@@ -4,7 +4,6 @@ const BlogsSchema = require('../models/blogs')
 const Coment = require('../models/commentSchema')
 const Like = require('../models/likeSchema')
 const Message = require('../models/contactMe')
-const Token = require('../models/token')
 const jwt = require('jsonwebtoken')
 
 
@@ -176,11 +175,7 @@ module.exports.Adminlogin_post = async (req, res) => {
             sameSite:'none',
         })
 
-        await Token.create({ token })
-
-        res.jwt = token
-
-        return res.status(200).json({ "statusCode": 200, "message": 'Admin log in succesful', "jwt": token })
+        return res.status(200).json({ "statusCode": 200, "message": 'Admin log in succesful', admin: admin._id, })
     }
     catch (err) {
         const errors = handleErrors(err)
@@ -495,7 +490,7 @@ module.exports.deleteAllLikes = async (req, res) => {
     } catch (error) {
         res.status(404)
         res.json({
-            statusCode: 404,
+            statusCode: 400,
             error: error.message
         })
     }
@@ -522,20 +517,5 @@ module.exports.messageFromUsers = async (req, res) => {
         return res.status(200).json({ 'statusCode': 200, 'message': 'Successfully', 'data': messages})
     } catch (error) {
         return res.status(404).send(error)
-    }
-}
-
-module.exports.token = async (req, res) => {
-
-    const { token } = req.body
-    try {
-        const token = await Token.find()
-        return res.status(200).json({ 'statusCode': 200, 'message': 'success', 'data': token} )
-    } catch (error) {
-        res.status(400)
-        return res.json({
-            'statusCode': 400,
-            'message': error.message
-        })
     }
 }

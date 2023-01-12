@@ -9,12 +9,11 @@ const app = express()
 const requireAuth = (req, res, next) => {
     //console.log(req)
     const token = req.cookies.jwt
-    const jwtToken = req.body.jwt
 
     //check json web token exists & verified
-    if (jwtToken) {
+    if (token) {
 
-        jwt.verify(jwtToken, 'isiotaidigitalfafocal', (err, decodedToken) => {
+        jwt.verify(token, 'isiotaidigitalfafocal', (err, decodedToken) => {
             if (err) {
                 //console.log(err.message)
                 return res.status(401).json({ "statusCode": 401, "message": "You are not an admin"})
