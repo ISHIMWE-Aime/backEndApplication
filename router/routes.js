@@ -136,6 +136,48 @@ const { requireAuth, checkUser } = require('../middlerware/middleware')
  *          UserMessage: Hi, I like your blogs!
  */
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Sign Up:
+ *      type: object
+ *      required:
+ *        - firstName
+ *        - middleName
+ *        - lastName
+ *        - email
+ *        - userPreference
+ *        - phoneCountryCode
+ *        - phone
+ *        - password
+ *      properties:
+ *        firstName:
+ *          type: String
+ *          default: ISHIMWE
+ *        middleName:
+ *          type: String
+ *          default: Aime
+ *          description: (Optional)
+ *        lastName:
+ *          type: String
+ *          default: Honore
+ *        email:
+ *          type: String
+ *          default: mario@gmail.com
+ *        userPreference:
+ *          type: String
+ *          default: Web-development
+ *        phoneCountryCode:
+ *          type: String
+ *          default: +250
+ *        phone:
+ *          type: String
+ *          default: 0787414868
+ *        password:
+ *          type: String
+ *          default: Teta@2005
+ */
 /******************* End Swagger Schemas **********************/
 //home page 
 router.get('/', controllers.home)
@@ -173,7 +215,7 @@ router.post('/adminRegister', controllers.adminRegister)
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User Log in'
+ *             $ref: '#/components/schemas/sign Up'
  *     responses:
  *       '200':
  *         description: Your registration done successfully
