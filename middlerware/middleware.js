@@ -9,6 +9,7 @@ const app = express()
 const requireAuth = (req, res, next) => {
     //console.log(req)
     const token = req.cookies.jwt
+    const jwtToken = req.body.jwt
 
     //check json web token exists & verified
     if (token) {
