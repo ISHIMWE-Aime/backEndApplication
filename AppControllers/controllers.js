@@ -149,7 +149,7 @@ module.exports.Userlogin_post = async (req, res) => {
             }
         )
 
-        return res.status(200).json({ "statusCode": 200, "message": 'user log in succesful', user: user._id, })
+        return res.status(200).json({ "statusCode": 200, "message": 'user log in succesful', "jwt": token })
     }
     catch (err) {
         const errors = handleErrors(err)
@@ -175,7 +175,7 @@ module.exports.Adminlogin_post = async (req, res) => {
             sameSite:'none',
         })
 
-        return res.status(200).json({ "statusCode": 200, "message": 'Admin log in succesful', admin: admin._id, })
+        return res.status(200).json({ "statusCode": 200, "message": 'Admin log in succesful', "jwt": token })
     }
     catch (err) {
         const errors = handleErrors(err)
