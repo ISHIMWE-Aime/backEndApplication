@@ -174,6 +174,7 @@ module.exports.Adminlogin_post = async (req, res) => {
             secure: true,
             sameSite:'none',
         })
+        res.jwt = token
 
         return res.status(200).json({ "statusCode": 200, "message": 'Admin log in succesful', admin: admin._id, })
     }
