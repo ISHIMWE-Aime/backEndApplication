@@ -43,11 +43,6 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(routes)
 
-//headers 
-header("Access-Control-Allow-Credentials: true");
-header("Access-Control-Allow-Methods: GET, POST, DELETE, PATCH");
-header("Access-Control-Allow-Headers: Content-Type, *");
-
 //'mongodb://localhost:27017/MyBranding'
 
 "mongodb+srv://ISHIMWE-aime:Teta2005@cluster0.ytng98j.mongodb.net/MyBrand?retryWrites=true&w=majority"
