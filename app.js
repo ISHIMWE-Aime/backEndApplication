@@ -16,6 +16,21 @@ const options = {
 			description: 'Example of CRUD API ',
 			version: '1.0.0',
 		},
+		components: {
+			securitySchemes: {
+				jwt: {
+					type: 'http',
+					scheme: 'bearer',
+					in: 'header',
+					bearerFormat: 'JWT'
+				}
+			}
+		},
+		security: [
+			{
+				jwt: []
+			}
+		],
 		servers:[
 			{
 				url: "https://backendapplication.up.railway.app"
