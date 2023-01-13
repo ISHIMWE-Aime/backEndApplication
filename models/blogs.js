@@ -18,9 +18,19 @@ const blogsSchema = mongoose.Schema({
         unique: true,
     },
     imageUlr: {
-        type: [String],
-        required: [true, 'Please enter a blog content'],
-        unique: true,
+        type:  [String] ,
+        required: true,
+        validate: [ 
+            (array)=>{
+                console.log("the image ulr is this: ",array)
+                if(array[0] === ''){
+                    //console.log('false returned!!!!!!!!!!!!!!!!!!!!!!!!!!')
+                    return false
+                }else{
+                    return true
+                }
+            }
+            , 'Please enter a image ulr to this blog'],
     }
 })
 

@@ -59,6 +59,15 @@ const handleErrors = (err) => {
         })
     }
 
+    //validation errors for create blog
+    if (err.message.includes('Blog validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            console.log(properties)
+
+            errors[properties.path] = properties.message
+        })
+    }
+
     return [errors, flag]
 }
 
@@ -323,11 +332,15 @@ module.exports.createBlog = async (req, res) => {
         res.status(201).json({ "statusCode": 201, "message": "Created successfully" })
 
     } catch (error) {
-        res.status(400)
-        res.json({
-        statusCode: 400,
-        error: error.message
-        })
+
+        const errors = handleErrors(error)
+        return res.status(400).json({ 'statusCode': 400, 'message': errors })
+
+        // res.status(400)
+        // res.json({
+        // statusCode: 400,
+        // error: error.message
+        // })
     }
 }
 

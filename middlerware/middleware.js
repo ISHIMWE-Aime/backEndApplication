@@ -16,7 +16,14 @@ const requireAuth = (req, res, next) => {
         console.log('The authorisation available')
     }
 
-    const token = authorization
+    let token = authorization.split(" ")
+
+    if(token.length > 1){
+        token = token[1]
+    }
+    else{
+        token = token[0]
+    }
 
     //check json web token exists & verified
     if (token) {
@@ -55,8 +62,15 @@ const checkUser = (req, res, next) => {
         console.log('The authorisation available')
     }
 
-    const token = authorization
+    const token = authorization.split(" ")
     
+    if(token.length > 1){
+        token = token[1]
+    }
+    else{
+        token = token[0]
+    }
+
     if (token) {
         jwt.verify(token, 'iotuserdigitalfocal', async (err, decodedToken) => {
             if (err) {
