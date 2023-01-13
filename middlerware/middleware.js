@@ -7,8 +7,11 @@ const app = express()
 
 
 const requireAuth = (req, res, next) => {
-    //console.log(req)
+    console.log("the requireAuth running")
     //const token = req.cookies.jwt
+
+    const { authorization } = req.headers;
+    console.log('The authorisation is: ', authorization)
 
     if (!authorization) {
         return res.sendStatus(403);
@@ -25,6 +28,7 @@ const requireAuth = (req, res, next) => {
         token = token[0]
     }
 
+    //console.log("token after condition",token)
     //check json web token exists & verified
     if (token) {
 
@@ -56,14 +60,17 @@ const checkUser = (req, res, next) => {
 
     //const token = req.cookies.jwt
 
+    const { authorization } = req.headers;
+    console.log('The authorisation is: ', authorization)
+
     if (!authorization) {
         return res.sendStatus(403);
     }else{
         console.log('The authorisation available')
     }
 
-    const token = authorization.split(" ")
-    
+    let token = authorization.split(" ")
+
     if(token.length > 1){
         token = token[1]
     }
@@ -71,6 +78,8 @@ const checkUser = (req, res, next) => {
         token = token[0]
     }
 
+    //console.log("token after condition",token)
+    
     if (token) {
         jwt.verify(token, 'iotuserdigitalfocal', async (err, decodedToken) => {
             if (err) {
