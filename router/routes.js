@@ -535,7 +535,41 @@ router.delete("/deleteOneBlog/:id", requireAuth, controllers.deleteOneBlog)
 //Delete all blogs 
 router.delete("/deleteAllBlogs", requireAuth, controllers.deleteAllBlogs)
 
+/**
+ * @swagger
+ * /publishBlog:
+ *   post:
+ *     summary: Publish new blog
+ *     tags: [Admin Blog Post]
+ *     requestBody:
+ *       description: please fill all required fields
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/blog'
+ *     responses:
+ *       '201':
+ *         description: Published successfully
+ */
+//Publish a blog
+router.post("/publishBlog", requireAuth, controllers.publishBlog)
 
+/**
+ * @swagger
+ * /publishedBlogs:
+ *    get:
+ *      tags: [Admin Blog Post]
+ *      summary: Get all published Blogs
+ *      description: Returns all blogs from our database
+ *      responses:
+ *        200:
+ *          description: Get all published blogs succefully
+ *        406:
+ *          description: Please log in
+ */
+// Get published all blogs
+router.get("/publishedBlogs", requireAuth, controllers.publishedBlogs)
 
 /************* USER Ops *****************/
 

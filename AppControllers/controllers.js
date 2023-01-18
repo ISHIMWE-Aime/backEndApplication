@@ -1,6 +1,7 @@
 const AdminSchema = require('../models/adminRegister')
 const UserSchema = require('../models/userRegister')
 const BlogsSchema = require('../models/blogs')
+const PublishedBlogsSchema = require('../models/publishedBlogs')
 const Coment = require('../models/commentSchema')
 const Like = require('../models/likeSchema')
 const Message = require('../models/contactMe')
@@ -376,6 +377,11 @@ module.exports.deleteOneBlog = async (req, res) => {
         await BlogsSchema.deleteOne({
             _id: req.params.id
         })
+        
+        await PublishedBlogsSchema.deleteOne({
+            _id: req.params.id
+        })
+        
         res.status(200).json({ "statusCode": 200, "message": "Deleted Successfully" })
     } catch (error) {
         res.status(400)
@@ -397,6 +403,43 @@ module.exports.deleteAllBlogs = async (req, res) => {
             statusCode: 400,
             error: error.message
         })
+    }
+}
+
+// Published blogs
+module.exports.publishBlog = async (req, res) => {
+    try {
+        const publishedBlog = new PublishedBlogsSchema({
+            title: req.body.title,
+            author: req.body.author,
+            content: req.body.content,
+            imageUlr: req.body.imageUlr
+        })
+        await publishedBlog.save()
+
+        const blog = new BlogsSchema({
+            title: req.body.title,
+            author: req.body.author,
+            content: req.body.content,
+            imageUlr: req.body.imageUlr
+        })
+        await blog.save()
+
+        return res.status(201).json({ "statusCode": 201, "message": "Created successfully" })
+
+    } catch (error) {
+        const errors = handleErrors(error)
+        return res.status(400).json({ 'statusCode': 400, 'message': errors })
+    }
+}
+
+// Get all published blogs
+module.exports.publishedBlogs = async (req, res) => {//creation of new 'GET' route with "router.get"
+    try {
+        const publishedBlogs = await PublishedBlogsSchema.find()
+        res.json({ "statusCode": 200, "message": "Successfully", "data": publishedBlogs });
+    } catch (error) {
+        res.status(400).json({ "statusCode": 200, "message": error.message })
     }
 }
 
