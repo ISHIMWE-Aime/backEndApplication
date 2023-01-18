@@ -569,7 +569,7 @@ router.post("/publishBlog", requireAuth, controllers.publishBlog)
  *          description: Please log in
  */
 // Get published all blogs
-router.get("/publishedBlogs", requireAuth, controllers.publishedBlogs)
+router.get("/publishedBlogs", controllers.publishedBlogs)
 
 /************* USER Ops *****************/
 

@@ -417,15 +417,24 @@ module.exports.publishBlog = async (req, res) => {
         })
         await publishedBlog.save()
 
-        const blog = new BlogsSchema({
-            title: req.body.title,
-            author: req.body.author,
-            content: req.body.content,
-            imageUlr: req.body.imageUlr
-        })
-        await blog.save()
+        const alreadyIn = await BlogsSchema.findOne(
+            {
+                title: req.body.title
+            }
+        )
 
-        return res.status(201).json({ "statusCode": 201, "message": "Created successfully" })
+        if(alreadyIn){
+            return res.status(201).json({ "statusCode": 201, "message": "Created successfully" })
+        }else{
+            const blog = new BlogsSchema({
+                title: req.body.title,
+                author: req.body.author,
+                content: req.body.content,
+                imageUlr: req.body.imageUlr
+            })
+            await blog.save()
+            return res.status(201).json({ "statusCode": 201, "message": "Created successfully" })
+        }
 
     } catch (error) {
         const errors = handleErrors(error)
