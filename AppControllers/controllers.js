@@ -454,27 +454,70 @@ module.exports.publishedBlogs = async (req, res) => {//creation of new 'GET' rou
 
 /***************** User Reactions *******************/
 
-//Coment
+///Coment
 
 module.exports.coment = async (req, res) => {
-
-    console.log(req.body)
-
     const { blogId, userId, comentData } = req.body
 
-    try {
-        const coment = await Coment.create({ blogId, userId, comentData })
-        return res.status(201).json({"statusCode": 201, "message": "Coment created", "data": [ coment ]})
-    } catch (error) {
-        // const errors = handleErrors(error)
-        // if (errors[1]) {
-        //     return res.status(400).json({ "statusCode": 400, "message": errors[0] })
-        // }
-        // else {
-        //     res.status(400).json(errors)
-        // }
+    let comentFromDB = await Coment.find()
 
-        console.log("Error Ocurs", error)
+    try {
+        if(comentFromDB[0] === undefined){
+            new Coment({ blogId, userId, comentData })
+            return res.status(201).json({"statusCode": 201, "message": "Coment created", "data": (await Coment.find())})
+        }
+        else{
+            console.log('Is rinning');
+            for(let i = 0; i < comentFromDB.length; i++){
+                if(comentFromDB[i]['blogId'] === blogId){
+                    comentFromDB[i]['blogId'] = blogId
+                    comentFromDB[i]['userId'] = userId
+                    comentFromDB[i]['comentData'] += (' ' + comentData)
+                }
+            }
+            await Coment.create(comentFromDB)
+            res.status(201).json({"statusCode": 201, "message": "Comment created", "data": (await Coment.find())})
+        }
+    } catch (error) {
+        console.log(error)
+        const errors = handleErrors(error)
+        if (errors[1]) {
+            return res.status(400).json({ "statusCode": 400, "message": errors[0] })
+        }
+        else {
+            res.status(400).json(errors)
+        }
+    }
+}
+
+// Get all coments
+
+module.exports.allComents = async (req, res) => {
+    try {
+        const allComents = await Coment.find()
+        return res.status(200).json({
+            'statusCode': 200,
+            'message': 'Successful',
+            'data': allComents
+        })
+    } catch (error) {
+        return res.status(404).json({
+            'statusCode': 404,
+            'message': error.message
+        })
+    }
+}
+
+//Delete all likes
+module.exports.deleteAllComents = async (req, res) => {
+    try {
+        await Coment.deleteMany()
+        res.status(200).json({ "statusCode": 200, "message": "Successful" })
+    } catch (error) {
+        res.status(404)
+        res.send(
+            { error: error.message }
+        )
     }
 }
 
@@ -544,6 +587,23 @@ module.exports.like = async (req, res) => {
  
     } catch (error) {
         console.log("Error Ocurs", error)
+    }
+}
+
+// Get all likes
+module.exports.allLikes = async (req, res) => {
+    try {
+        const allLikes = await Like.find()
+        return res.status(200).json({
+            'statusCode': 200,
+            'message': 'Successful',
+            'data': allLikes
+        })
+    } catch (error) {
+        return res.status(404).json({
+            'statusCode': 404,
+            'message': error.message
+        })
     }
 }
 

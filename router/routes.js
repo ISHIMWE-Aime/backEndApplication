@@ -46,24 +46,61 @@ const { requireAuth, checkUser } = require('../middlerware/middleware')
  * @swagger
  * components:
  *  schemas:
+ *    Sign Up:
+ *      type: object
+ *      required:
+ *        - firstName
+ *        - middleName
+ *        - lastName
+ *        - email
+ *        - userPreference
+ *        - phoneCountryCode
+ *        - phone
+ *        - password
+ *      properties:
+ *        firstName:
+ *          type: String
+ *          default: ISHIMWE
+ *        middleName:
+ *          type: String
+ *          default: Aime
+ *          description: (Optional)
+ *        lastName:
+ *          type: String
+ *          default: Honore
+ *        email:
+ *          type: String
+ *          default: mario@gmail.com
+ *        userPreference:
+ *          type: String
+ *          default: Web-development
+ *        phoneCountryCode:
+ *          type: String
+ *          default: +250
+ *        phone:
+ *          type: String
+ *          default: 0787414868
+ *        password:
+ *          type: String
+ *          default: Teta@2005
+ */
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
  *    User Log in:
  *      type: object
  *      required:
  *        - email
  *        - password
  *      properties:
- *        _id:
- *           type: string
- *           description: The auto-generated id of the blog
  *        email:
  *          type: string
  *          default: mario@google.com
  *        password:
  *          type: string
  *          default: Teta@2005
- *        _v:
- *          type: string
- *          description: Version
  */
 
 /**
@@ -136,48 +173,6 @@ const { requireAuth, checkUser } = require('../middlerware/middleware')
  *          UserMessage: Hi, I like your blogs!
  */
 
-/**
- * @swagger
- * components:
- *  schemas:
- *    Sign Up:
- *      type: object
- *      required:
- *        - firstName
- *        - middleName
- *        - lastName
- *        - email
- *        - userPreference
- *        - phoneCountryCode
- *        - phone
- *        - password
- *      properties:
- *        firstName:
- *          type: String
- *          default: ISHIMWE
- *        middleName:
- *          type: String
- *          default: Aime
- *          description: (Optional)
- *        lastName:
- *          type: String
- *          default: Honore
- *        email:
- *          type: String
- *          default: mario@gmail.com
- *        userPreference:
- *          type: String
- *          default: Web-development
- *        phoneCountryCode:
- *          type: String
- *          default: +250
- *        phone:
- *          type: String
- *          default: 0787414868
- *        password:
- *          type: String
- *          default: Teta@2005
- */
 /******************* End Swagger Schemas **********************/
 //home page 
 router.get('/', controllers.home)
@@ -215,7 +210,7 @@ router.post('/adminRegister', controllers.adminRegister)
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/sign Up'
+ *             $ref: '#/components/schemas/Sign Up'
  *     responses:
  *       '200':
  *         description: Your registration done successfully
@@ -612,6 +607,44 @@ router.post("/createComent", checkUser, controllers.coment)
 
 /**
  * @swagger
+ * /allComents:
+ *    get:
+ *      tags: [Admin CRUDs Ops on User reactions]
+ *      summary: get all coments and thier coresponding blogs
+ *      description: returns all coments from my database
+ *      responses:
+ *        200:
+ *          description: This routes get all coments
+ *        404:
+ *          description: Coments Not Found
+ */
+// Get all coments
+router.get("/allComents", controllers.allComents)
+
+
+/**
+ * @swagger
+ * /allComents:
+ *    delete:
+ *      tags: [Admin CRUDs Ops on User reactions]
+ *      summary: Delete all Coments
+ *      responses:
+ *        200:
+ *          description: All Deleted Successfully
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *        404:
+ *          description: not found
+ *        406:
+ *          description: Please log in
+ */
+//Delete all user
+router.delete('/allComents', requireAuth, controllers.deleteAllComents)
+
+/**
+ * @swagger
  * /like:
  *   post:
  *     summary: Like a blog
@@ -628,6 +661,22 @@ router.post("/createComent", checkUser, controllers.coment)
  *         description: Liked successfully
  */
 router.post("/like", checkUser,controllers.like)
+
+/**
+ * @swagger
+ * /allLikes:
+ *    get:
+ *      tags: [Admin CRUDs Ops on User reactions]
+ *      summary: get all likes and thier coresponding blogs
+ *      description: returns all likes from my database
+ *      responses:
+ *        200:
+ *          description: This routes get all likes
+ *        404:
+ *          description: Likes Not Found
+ */
+// Get all likes
+router.get("/allLikes", controllers.allLikes)
 
 /**
  * @swagger
