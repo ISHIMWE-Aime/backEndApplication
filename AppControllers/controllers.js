@@ -371,11 +371,11 @@ module.exports.updateBlog = async (req, res) => {
             }
     
             if (req.body.author) {
-                blog.content = req.body.author
+                blog.author = req.body.author
             }
     
             if (req.body.imageUlr) {
-                blog.content = req.body.imageUlr
+                blog.imageUlr = req.body.imageUlr
             }
 
             await blog.save()
@@ -396,11 +396,11 @@ module.exports.updateBlog = async (req, res) => {
             }
     
             if (req.body.author) {
-                blogToupD.content = req.body.author
+                blogToupD.author = req.body.author
             }
     
             if (req.body.imageUlr) {
-                blogToupD.content = req.body.imageUlr
+                blogToupD.imageUlr = req.body.imageUlr
             }
     
             await blogToupD.save()
