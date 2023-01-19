@@ -361,16 +361,51 @@ module.exports.updateBlog = async (req, res) => {
             _id: req.params.id
         });
 
-        if (req.body.title) {
-            blog.title = req.body.title;
+        if(blog){
+            if (req.body.title) {
+                blog.title = req.body.title;
+            }
+    
+            if (req.body.content) {
+                blog.content = req.body.content
+            }
+    
+            if (req.body.author) {
+                blog.content = req.body.author
+            }
+    
+            if (req.body.imageUlr) {
+                blog.content = req.body.imageUlr
+            }
+
+            await blog.save()
+            res.status(200).json({ "statusCode": 200, "message": "Updated Successfully" })
         }
 
-        if (req.body.content) {
-            blog.content = req.body.content
-        }
+        const blogToupD = await PublishedBlogsSchema.findOne({
+            _id: req.params.id
+        })
 
-        await blog.save()
-        res.status(200).json({ "statusCode": 200, "message": "Updated Successfully" })
+        if(blogToupD){
+            if (req.body.title) {
+                blogToupD.title = req.body.title;
+            }
+    
+            if (req.body.content) {
+                blogToupD.content = req.body.content
+            }
+    
+            if (req.body.author) {
+                blogToupD.content = req.body.author
+            }
+    
+            if (req.body.imageUlr) {
+                blogToupD.content = req.body.imageUlr
+            }
+    
+            await blogToupD.save()
+            res.status(200).json({ "statusCode": 200, "message": "Updated Successfully" })
+        }
     } catch (error) {
         res.status(400)
         res.json({
