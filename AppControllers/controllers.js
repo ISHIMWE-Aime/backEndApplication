@@ -379,7 +379,7 @@ module.exports.updateBlog = async (req, res) => {
             }
 
             await blog.save()
-            res.status(200).json({ "statusCode": 200, "message": "Updated Successfully" })
+            res.status(200).json({ "statusCode": 200, "message": "Blog Updated in drafts Successfully" })
         }
 
         const blogToupD = await PublishedBlogsSchema.findOne({
@@ -404,7 +404,7 @@ module.exports.updateBlog = async (req, res) => {
             }
     
             await blogToupD.save()
-            res.status(200).json({ "statusCode": 200, "message": "Updated Successfully" })
+            res.status(200).json({ "statusCode": 200, "message": "Blog Updated in posts Successfully" })
         }
     } catch (error) {
         res.status(400)
