@@ -69,6 +69,15 @@ const handleErrors = (err) => {
         })
     }
 
+        //validation errors for message
+        if (err.message.includes('message validation failed')) {
+            Object.values(err.errors).forEach(({ properties }) => {
+                console.log(properties)
+    
+                errors[properties.path] = properties.message
+            })
+        }
+
     return [errors, flag]
 }
 
@@ -631,15 +640,15 @@ module.exports.saveMessage = async (req, res) => {
         const message = await Message.create({ fullname, email, UserMessage })
         return res.status(200).json({ 'statusCode': 200, 'message': 'Message sent', 'data': (await Message.find())})
     } catch (error) {
-        
+
         console.log(error)
 
-        const errors = handleErrors(err)
-        if(errors[0].email !== ""){
-            return res.status(400).json({ 'statusCode': 400, 'message': { email: 'Your are not an admin' } })
+        const errors = handleErrors(error)
+        if (errors[1]) {
+            return res.status(400).json({ "statusCode": 400, "message": errors[0] })
         }
-        else{
-            return res.status(400).json({ 'statusCode': 400, 'message': errors[0] })
+        else {
+            res.status(400).json({'statusCode': 400,'message': errors})
         }
     }
 }

@@ -5,7 +5,7 @@ const { isEmail } = require('validator')
 const contactMe = mongoose.Schema({
     fullname: {
         type: String,
-        require: [true, 'Please enter your name for more clarity']
+        required: [true, 'Please enter your name for more clarity']
     },
     email: {
         type: String,

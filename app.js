@@ -35,6 +35,9 @@ const options = {
 		servers:[
 			{
 				url: "https://backendapplication.up.railway.app"
+			},
+			{
+				url: "https://important-red-beanie.cyclic.app"
 			}
 		]
 	},
