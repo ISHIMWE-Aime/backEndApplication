@@ -632,7 +632,13 @@ module.exports.saveMessage = async (req, res) => {
         return res.status(200).json({ 'statusCode': 200, 'message': 'Message sent', 'data': (await Message.find())})
     } catch (error) {
         console.log(error)
-        return res.status(400).send(error)
+        const errors = handleErrors(err)
+        if(errors[0].email !== ""){
+            return res.status(400).json({ 'statusCode': 400, 'message': { email: 'Your are not an admin' } })
+        }
+        else{
+            return res.status(400).json({ 'statusCode': 400, 'message': errors[0] })
+        }
     }
 }
 
@@ -641,6 +647,6 @@ module.exports.messageFromUsers = async (req, res) => {
         const messages = await Message.find()
         return res.status(200).json({ 'statusCode': 200, 'message': 'Successfully', 'data': messages})
     } catch (error) {
-        return res.status(404).send(error)
+        return res.status(404).send(error.message)
     }
 }
