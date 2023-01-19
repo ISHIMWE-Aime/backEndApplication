@@ -491,23 +491,23 @@ module.exports.publishedBlogs = async (req, res) => {//creation of new 'GET' rou
     }
 }
 
-module.exports.editedBlogs = async (req, res) => {
-    try {
-        
-        const EditedBlog = new EditedBlogsSchema({
-            title: req.body.title,
-            author: req.body.author,
-            content: req.body.content,
-            imageUlr: req.body.imageUlr
-        })
-        await EditedBlog.save()
-        res.status(201).json({ "statusCode": 200, "message": "Saved successfully" })
+// module.exports.editedBlogs = async (req, res) => {
+//     try {
 
-    } catch (error) {
-        const errors = handleErrors(error)
-        return res.status(400).json({ 'statusCode': 400, 'message': errors })
-    }
-}
+//         const EditedBlog = new EditedBlogsSchema({
+//             title: req.body.title,
+//             author: req.body.author,
+//             content: req.body.content,
+//             imageUlr: req.body.imageUlr
+//         })
+//         await EditedBlog.save()
+//         res.status(201).json({ "statusCode": 200, "message": "Saved successfully" })
+
+//     } catch (error) {
+//         const errors = handleErrors(error)
+//         return res.status(400).json({ 'statusCode': 400, 'message': errors })
+//     }
+// }
 
 /***************** User Reactions *******************/
 
