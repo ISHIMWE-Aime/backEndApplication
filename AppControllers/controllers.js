@@ -493,13 +493,13 @@ module.exports.publishedBlogs = async (req, res) => {//creation of new 'GET' rou
 
 module.exports.editedBlogs = async (req, res) => {
     try {
-        const blog = new EditedBlogsSchema({
+        const EditedBlog = new EditedBlogsSchema({
             title: req.body.title,
             author: req.body.author,
             content: req.body.content,
             imageUlr: req.body.imageUlr
         })
-        await blog.save()
+        await EditedBlog.save()
         res.status(201).json({ "statusCode": 200, "message": "Saved successfully" })
 
     } catch (error) {
