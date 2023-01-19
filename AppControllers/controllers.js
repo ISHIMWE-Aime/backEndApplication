@@ -631,7 +631,9 @@ module.exports.saveMessage = async (req, res) => {
         const message = await Message.create({ fullname, email, UserMessage })
         return res.status(200).json({ 'statusCode': 200, 'message': 'Message sent', 'data': (await Message.find())})
     } catch (error) {
+        
         console.log(error)
+
         const errors = handleErrors(err)
         if(errors[0].email !== ""){
             return res.status(400).json({ 'statusCode': 400, 'message': { email: 'Your are not an admin' } })
