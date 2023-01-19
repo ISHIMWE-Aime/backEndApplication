@@ -493,6 +493,7 @@ module.exports.publishedBlogs = async (req, res) => {//creation of new 'GET' rou
 
 module.exports.editedBlogs = async (req, res) => {
     try {
+        
         const EditedBlog = new EditedBlogsSchema({
             title: req.body.title,
             author: req.body.author,
