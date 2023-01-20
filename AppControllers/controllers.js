@@ -522,7 +522,7 @@ module.exports.coment = async (req, res) => {
         // if(comentFromDB[0] === undefined){
         // }
             const coment = new Coment({ blogId, userId, comentData })
-            coment.save()
+            await coment.save()
             return res.status(201).json({"statusCode": 201, "message": "Coment created", "data": (await Coment.find())})
         // else{
         //     console.log('Is rinning');

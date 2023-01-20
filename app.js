@@ -37,6 +37,9 @@ const options = {
 				url: "https://backendapplication.up.railway.app"
 			},
 			{
+				url: "http://localhost:5000"
+			},
+			{
 				url: "https://important-red-beanie.cyclic.app"
 			}
 		]

@@ -15,8 +15,10 @@ const comentSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter a coment content'],
         unique: false
-    }
-})
+    },
+},
+{ timestamps: true }
+)
 
 comentSchema.pre('save', async function(next){
     comentSchema.set('validateBeforeSave', false)
