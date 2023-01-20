@@ -304,6 +304,25 @@ router.get('/allUsers', requireAuth, controllers.allUsers)
 
 /**
  * @swagger
+ * /allUsers:
+ *    get:
+ *      tags: [Admin CRUDs Ops on users]
+ *      summary: get all users
+ *      description: returns all blogs from our database
+ *      responses:
+ *        200:
+ *          description: blogs get all blogs from our api
+ *        404:
+ *          description: not found
+ *        406:
+ *          description: Please log in
+ */
+
+//Get all users
+router.get('/allUsersComentors', controllers.allUsers)
+
+/**
+ * @swagger
  * /getOneUser/{blogId}:
  *    get:
  *      tags: [Admin CRUDs Ops on users]
