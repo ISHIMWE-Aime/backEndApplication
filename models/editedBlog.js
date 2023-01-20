@@ -33,5 +33,5 @@ const editedBlogsSchema = mongoose.Schema({
     }
 })
 
-const EditedBlogsSchema = mongoose.model('Blog', editedBlogsSchema)
+const EditedBlogsSchema = mongoose.model('editedBlogsSchema', editedBlogsSchema)
 module.exports = EditedBlogsSchema

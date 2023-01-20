@@ -519,22 +519,23 @@ module.exports.coment = async (req, res) => {
     let comentFromDB = await Coment.find()
 
     try {
-        if(comentFromDB[0] === undefined){
-            new Coment({ blogId, userId, comentData })
+        // if(comentFromDB[0] === undefined){
+        // }
+            const coment = new Coment({ blogId, userId, comentData })
+            coment.save()
             return res.status(201).json({"statusCode": 201, "message": "Coment created", "data": (await Coment.find())})
-        }
-        else{
-            console.log('Is rinning');
-            for(let i = 0; i < comentFromDB.length; i++){
-                if(comentFromDB[i]['blogId'] === blogId){
-                    comentFromDB[i]['blogId'] = blogId
-                    comentFromDB[i]['userId'] = userId
-                    comentFromDB[i]['comentData'] += (' ' + comentData)
-                }
-            }
-            await Coment.create(comentFromDB)
-            res.status(201).json({"statusCode": 201, "message": "Comment created", "data": (await Coment.find())})
-        }
+        // else{
+        //     console.log('Is rinning');
+        //     for(let i = 0; i < comentFromDB.length; i++){
+        //         if(comentFromDB[i]['blogId'] === blogId){
+        //             comentFromDB[i]['blogId'] = blogId
+        //             comentFromDB[i]['userId'] = userId
+        //             comentFromDB[i]['comentData'] += (' ' + comentData)
+        //         }
+        //     }
+        //     await Coment.create(comentFromDB)
+        //     res.status(201).json({"statusCode": 201, "message": "Comment created", "data": (await Coment.find())})
+        // }
     } catch (error) {
         console.log(error)
         const errors = handleErrors(error)
