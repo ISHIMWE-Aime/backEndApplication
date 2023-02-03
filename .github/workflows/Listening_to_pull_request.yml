@@ -1,4 +1,4 @@
-name: learn-github-actions
+name: learn-github-actions for pull request
 run-name: ${{ github.actor }} is learning GitHub Actions for pull request
 on: [pull_request]
 jobs:
