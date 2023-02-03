@@ -1,0 +1,7 @@
+name: integrate hound with eslint
+run-name: ${{ github.actor }} is learning integrating hound with eslint
+on: [pull_request]
+
+jobs:
+  eslint:
+    enabled: true
